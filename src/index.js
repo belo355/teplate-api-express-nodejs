@@ -1,10 +1,10 @@
 const express = require('express'); 
 const {uuid, isUuid} = require('uuidv4'); 
+const cors = require('cors'); 
 
 const app = express(); 
 app.use(express.json()); 
-
-
+app.use(cors()); 
 
 const projects = []; 
 
@@ -68,8 +68,8 @@ app.put('/projects/:id', (request, response) =>  {
   return response.json(project); 
 });
 
-app.delete('/projects/:id', (request, response) =>  {
-  const {id} = request.params; 
+app.delete('/projects/', (request, response) =>  {
+  const {id} = request.query; 
 
   const projectIndex = projects.findIndex(project => project.id === id); 
   
